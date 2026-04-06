@@ -1,0 +1,26 @@
+{
+  "name": "team-time",
+  "version": "1.0.0",
+  "description": "基于 `stitch_login_join_team` 示例实现的前端 Web 应用（移动端优先），包含以下核心页面与交互：",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuchenyu2008/team-time.git"
+  },
+  "keywords": [
+    "schedule",
+    "team",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zhuchenyu2008/team-time/issues"
+  },
+  "homepage": "https://github.com/zhuchenyu2008/team-time#readme"
+}
