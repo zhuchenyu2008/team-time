@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    image: team-time:local
+    ports:
+      - "${HOST_PORT:-4173}:4173"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4173
+      DATA_DIR: /app/data
+    volumes:
+      - team-time-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  team-time-data:

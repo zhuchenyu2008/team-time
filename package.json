@@ -1,11 +1,16 @@
 {
   "name": "team-time",
   "version": "1.0.0",
-  "description": "基于 `stitch_login_join_team` 示例实现的前端 Web 应用（移动端优先），包含以下核心页面与交互：",
+  "description": "移动端优先的行程协同排期 Web 应用，使用原生 Node.js、SQLite 和前端静态资源实现。",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "check": "node --check server.js && node --check app.js && node --check scripts/smoke-api.mjs && node --check scripts/e2e-main.mjs && node --check scripts/install-browsers.mjs",
+    "browsers:install": "node scripts/install-browsers.mjs",
+    "smoke:api": "node scripts/smoke-api.mjs",
+    "test:e2e": "node scripts/e2e-main.mjs",
+    "verify": "npm run check && npm run smoke:api && npm run test:e2e"
   },
   "repository": {
     "type": "git",
@@ -22,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/zhuchenyu2008/team-time/issues"
   },
-  "homepage": "https://github.com/zhuchenyu2008/team-time#readme"
+  "homepage": "https://github.com/zhuchenyu2008/team-time#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
 }

@@ -1,5 +1,8 @@
 node_modules/
 .npm-cache/
+.playwright-browsers/
+.tmp-smoke-data/
+test-results/
 data/*.db
 data/*.sqlite
 *.log

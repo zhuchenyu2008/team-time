@@ -31,6 +31,7 @@ body {
   color: var(--on-surface);
   background: radial-gradient(circle at 10% 0%, rgba(109, 254, 156, 0.24), transparent 45%),
     radial-gradient(circle at 90% 100%, rgba(255, 224, 131, 0.2), transparent 42%), var(--surface);
+  overflow-x: hidden;
 }
 
 .material-symbols-outlined {
@@ -47,6 +48,12 @@ button {
   background: none;
   color: inherit;
   cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary-container) 65%, white 35%);
+  outline-offset: 2px;
 }
 
 #app {
@@ -104,6 +111,7 @@ button {
 }
 
 .title-wrap {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -118,7 +126,7 @@ button {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .title-sub {
@@ -129,9 +137,16 @@ button {
 }
 
 .header-meta {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.title-main,
+.title-sub {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .header-actions {
@@ -170,7 +185,7 @@ button {
 .screen-body {
   flex: 1;
   overflow: auto;
-  padding: 16px 20px 14px;
+  padding: 16px 20px calc(18px + env(safe-area-inset-bottom));
 }
 
 .screen-body::-webkit-scrollbar {
@@ -182,7 +197,7 @@ button {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: 1.2rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .section-label {
@@ -202,6 +217,7 @@ button {
 }
 
 .team-chip {
+  max-width: 100%;
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
@@ -210,6 +226,7 @@ button {
   font-size: 0.68rem;
   font-weight: 700;
   color: var(--on-surface-variant);
+  overflow-wrap: anywhere;
 }
 
 .hero-card {
@@ -250,7 +267,7 @@ button {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 3rem;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .hero-value span {
@@ -262,6 +279,7 @@ button {
   margin: 8px 0 0;
   font-size: 0.9rem;
   opacity: 0.9;
+  overflow-wrap: anywhere;
 }
 
 .legend {
@@ -278,7 +296,87 @@ button {
   background: var(--surface-low);
 }
 
+.availability-settings-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px 12px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.availability-settings-card .availability-settings-section {
+  min-width: 0;
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--surface-lift);
+}
+
+.availability-settings-card .availability-date-section {
+  grid-column: 1;
+}
+
+.availability-settings-card .availability-trip-section {
+  grid-column: 2;
+}
+
+.availability-settings-card .availability-sync-footer {
+  grid-column: 1 / -1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 14px;
+  padding: 8px 10px;
+  background: color-mix(in srgb, var(--surface-lift) 86%, white 14%);
+}
+
+.availability-settings-card .availability-sync-label {
+  flex: 0 0 auto;
+}
+
+.availability-settings-card .availability-sync-copy {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--on-surface-variant);
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.availability-settings-card .availability-sync-sep {
+  opacity: 0.55;
+}
+
+.date-helper {
+  margin: 6px 0 0;
+  color: var(--on-surface-variant);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.availability-settings-card [data-role="sync-time"] {
+  display: inline-block;
+  min-width: 9.5em;
+}
+
+.availability-settings-card [data-role="sync-status-card"] .date-helper {
+  min-height: 2.9em;
+}
+
+[data-role="busy-hours"],
+[data-role="sync-time"] {
+  font-variant-numeric: tabular-nums;
+}
+
 .date-row {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -293,6 +391,7 @@ button {
 }
 
 .date-input {
+  min-width: 0;
   width: 100%;
   border: 0;
   background: transparent;
@@ -312,13 +411,174 @@ button {
   gap: 8px;
 }
 
+.date-add-btn {
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.date-chip-list {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.date-chip {
+  min-width: 0;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 6px 8px 6px 10px;
+  background: color-mix(in srgb, var(--surface-lift) 78%, white 22%);
+  color: var(--on-surface-variant);
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(145, 180, 228, 0.18);
+}
+
+.date-chip > :first-child {
+  min-width: 0;
+}
+
+.date-chip.active {
+  background: color-mix(in srgb, var(--primary-container) 42%, white 58%);
+  color: var(--primary-dim);
+}
+
+.date-remove-btn {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(61, 97, 140, 0.12);
+  color: var(--on-surface-variant);
+}
+
+.date-remove-btn .material-symbols-outlined {
+  font-size: 0.9rem;
+}
+
+.date-switch-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.date-switch-btn {
+  min-width: 0;
+  min-height: 36px;
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: var(--surface-lift);
+  color: var(--on-surface-variant);
+  font-size: 0.74rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.date-switch-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 110, 54, 0.16);
+}
+
+.duration-preset-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.duration-preset-btn {
+  min-width: 0;
+  min-height: 34px;
+  border-radius: 999px;
+  padding: 8px 6px;
+  background: var(--surface-lift);
+  color: var(--on-surface-variant);
+  font-size: 0.72rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.duration-preset-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 110, 54, 0.16);
+}
+
+.trip-time-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.time-field {
+  min-width: 0;
+  border-radius: 14px;
+  padding: 9px 10px;
+  background: var(--surface-lift);
+  display: grid;
+  gap: 5px;
+}
+
+.time-field span {
+  color: var(--on-surface-variant);
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.time-field input,
+.time-field select {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--on-surface);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.time-field input:focus,
+.time-field select:focus {
+  outline: none;
+}
+
+.time-field small {
+  color: var(--on-surface-variant);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.time-summary {
+  margin: 9px 2px 0;
+  color: var(--on-surface-variant);
+  font-size: 0.74rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
 .quick-btn {
+  min-width: 0;
   border-radius: 999px;
   padding: 8px 6px;
   background: var(--surface-lift);
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--on-surface-variant);
+  line-height: 1.2;
 }
 
 .quick-btn:active {
@@ -384,7 +644,7 @@ button {
 .slot-row {
   width: 100%;
   display: grid;
-  grid-template-columns: 62px 1fr auto;
+  grid-template-columns: 128px 1fr auto;
   align-items: center;
   gap: 12px;
   border-radius: 18px;
@@ -415,9 +675,11 @@ button {
   font-size: 0.95rem;
   text-align: right;
   color: color-mix(in srgb, var(--on-surface) 78%, white 22%);
+  font-variant-numeric: tabular-nums;
 }
 
 .slot-content {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -427,12 +689,14 @@ button {
 .slot-title {
   font-weight: 700;
   font-size: 0.86rem;
+  overflow-wrap: anywhere;
 }
 
 .slot-hint {
   color: color-mix(in srgb, var(--on-surface-variant) 90%, white 10%);
   font-size: 0.72rem;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .slot-row .material-symbols-outlined {
@@ -441,6 +705,7 @@ button {
 }
 
 .overview-card {
+  position: relative;
   border-radius: 24px;
   padding: 16px;
   background: var(--surface-low);
@@ -464,7 +729,7 @@ button {
   margin: 0;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .empty-state-card p {
@@ -480,31 +745,104 @@ button {
   margin-top: 12px;
 }
 
+.heat-label-strip {
+  display: grid;
+  grid-template-columns: repeat(48, minmax(0, 1fr));
+  column-gap: 0;
+  min-height: 20px;
+  margin-bottom: 6px;
+  align-items: end;
+  pointer-events: none;
+}
+
+.heat-busy-label {
+  justify-self: center;
+  width: max-content;
+  max-width: none;
+  border-radius: 999px;
+  padding: 2px 5px;
+  font-size: 0.58rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(5, 52, 92, 0.08);
+}
+
+.heat-busy-label.full {
+  background: rgba(0, 110, 54, 0.14);
+  color: var(--primary-dim);
+}
+
+.heat-busy-label.most {
+  background: rgba(150, 170, 0, 0.16);
+  color: #4f5900;
+}
+
+.heat-busy-label.half {
+  background: rgba(115, 93, 0, 0.15);
+  color: #5c4900;
+}
+
+.heat-busy-label.some {
+  background: rgba(180, 92, 0, 0.16);
+  color: #713900;
+}
+
+.heat-busy-label.none {
+  background: rgba(168, 56, 54, 0.14);
+  color: #762020;
+}
+
 .heat-strip {
   display: grid;
-  grid-template-columns: repeat(28, minmax(0, 1fr));
+  grid-template-columns: repeat(48, minmax(0, 1fr));
   gap: 4px;
 }
 
 .heat-cell {
+  display: block;
+  width: 100%;
+  min-width: 0;
   height: 30px;
   border-radius: 7px;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.16s ease;
 }
 
-.heat-cell:hover {
+.heat-cell:hover,
+.heat-cell:focus-visible {
   transform: translateY(-1px);
 }
 
-.heat-high {
+.heat-cell:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--on-surface) 42%, white 58%);
+  outline-offset: 2px;
+}
+
+.heat-cell:active {
+  transform: scale(0.96);
+}
+
+.heat-full {
   background: color-mix(in srgb, var(--primary-container) 78%, white 22%);
 }
 
-.heat-mid {
+.heat-most {
+  background: color-mix(in srgb, #d7ea76 76%, white 24%);
+}
+
+.heat-half {
   background: color-mix(in srgb, var(--secondary-container) 78%, white 22%);
 }
 
-.heat-low {
+.heat-some {
+  background: color-mix(in srgb, #ffb067 64%, white 36%);
+}
+
+.heat-none {
   background: color-mix(in srgb, var(--tertiary-container) 45%, white 55%);
 }
 
@@ -515,6 +853,49 @@ button {
   color: color-mix(in srgb, var(--on-surface-variant) 62%, white 38%);
   font-size: 0.68rem;
   font-weight: 700;
+}
+
+.heat-tooltip {
+  position: absolute;
+  z-index: 20;
+  width: max-content;
+  max-width: min(232px, calc(100% - 16px));
+  border-radius: 14px;
+  padding: 9px 10px;
+  background: color-mix(in srgb, var(--surface-lift) 94%, white 6%);
+  color: var(--on-surface);
+  box-shadow: 0 14px 32px rgba(5, 52, 92, 0.18);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.heat-tooltip[hidden] {
+  display: none;
+}
+
+.heat-tooltip p {
+  margin: 3px 0 0;
+}
+
+.heat-tooltip p:first-child {
+  margin-top: 0;
+}
+
+.heat-tooltip strong {
+  color: var(--on-surface);
+}
+
+.heat-tooltip-time {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.heat-tooltip-count {
+  color: var(--on-surface-variant);
 }
 
 .distribution-list {
@@ -530,12 +911,12 @@ button {
   background: var(--surface-lift);
   box-shadow: 0 6px 16px rgba(5, 52, 92, 0.06);
   display: grid;
-  grid-template-columns: 58px 1fr auto;
+  grid-template-columns: 126px 1fr auto;
   gap: 12px;
   align-items: center;
 }
 
-.distribution-row.high {
+.distribution-row.full {
   box-shadow: 0 10px 20px rgba(0, 110, 54, 0.14);
 }
 
@@ -544,9 +925,11 @@ button {
   font-size: 1rem;
   font-weight: 800;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .distribution-main {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -554,24 +937,36 @@ button {
 
 .availability-chip {
   width: fit-content;
+  max-width: 100%;
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 0.67rem;
   font-weight: 800;
   letter-spacing: 0.03em;
+  overflow-wrap: anywhere;
 }
 
-.availability-chip.high {
+.availability-chip.full {
   background: rgba(0, 110, 54, 0.14);
   color: var(--primary-dim);
 }
 
-.availability-chip.mid {
+.availability-chip.most {
+  background: rgba(150, 170, 0, 0.13);
+  color: #556000;
+}
+
+.availability-chip.half {
   background: rgba(115, 93, 0, 0.12);
   color: #665100;
 }
 
-.availability-chip.low {
+.availability-chip.some {
+  background: rgba(180, 92, 0, 0.13);
+  color: #7a3e00;
+}
+
+.availability-chip.none {
   background: rgba(168, 56, 54, 0.12);
   color: #7f2020;
 }
@@ -666,7 +1061,8 @@ button {
   font-family: "Plus Jakarta Sans", sans-serif;
   margin: 14px 0 0;
   font-size: 2rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .best-window p {
@@ -691,6 +1087,7 @@ button {
 }
 
 .attendee-main {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -700,6 +1097,7 @@ button {
   margin: 0;
   font-weight: 800;
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .attendee-meta {
@@ -710,11 +1108,13 @@ button {
 }
 
 .status-pill {
+  flex: 0 0 auto;
   margin-left: auto;
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 0.66rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .status-full {
@@ -774,15 +1174,11 @@ button {
 }
 
 .floating-save {
-  position: sticky;
-  bottom: calc(86px + env(safe-area-inset-bottom));
-  margin: 16px auto 0;
-  width: fit-content;
-  max-width: 100%;
+  display: none;
 }
 
 .floating-save .primary-btn {
-  padding-inline: 26px;
+  display: none;
 }
 
 .bottom-nav {
@@ -826,6 +1222,7 @@ button {
 
 .login-screen {
   min-height: 100vh;
+  min-height: 100svh;
   padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
@@ -874,7 +1271,7 @@ button {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 2.25rem;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .login-hero p {
@@ -946,6 +1343,7 @@ button {
 }
 
 .field-box input {
+  min-width: 0;
   width: 100%;
   border: 0;
   padding: 14px 2px;
@@ -1027,7 +1425,7 @@ button {
 
 .teammate-info strong {
   font-size: 0.83rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .teammate-info span {
@@ -1084,5 +1482,79 @@ button {
     border-radius: 32px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(5, 52, 92, 0.16);
+  }
+}
+
+@media (max-width: 420px) {
+  .top-bar {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .screen-body {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .title-sub {
+    display: none;
+  }
+  .hero-card,
+  .best-window {
+    border-radius: 24px;
+    padding: 20px;
+  }
+  .login-screen {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .login-card {
+    border-radius: 26px;
+    padding: 18px 14px 16px;
+  }
+  .quick-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .duration-preset-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .availability-settings-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 8px;
+  }
+  .availability-date-section,
+  .availability-trip-section {
+    grid-column: auto;
+  }
+  .availability-sync-footer {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .availability-sync-copy {
+    white-space: normal;
+  }
+  .trip-time-grid {
+    grid-template-columns: 1fr;
+  }
+  .date-switch-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .slot-row {
+    grid-template-columns: 96px 1fr auto;
+    gap: 9px;
+    padding: 10px;
+  }
+  .slot-time,
+  .distribution-time {
+    font-size: 0.82rem;
+  }
+  .distribution-row {
+    grid-template-columns: 96px 1fr auto;
+    gap: 9px;
+    padding: 10px;
+  }
+  .status-pill {
+    white-space: normal;
+    text-align: center;
   }
 }

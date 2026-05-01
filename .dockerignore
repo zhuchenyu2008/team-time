@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+node_modules
+.npm-cache
+.playwright-browsers
+.tmp-smoke-data
+test-results
+data
+*.log
+*.db
+*.sqlite
+Dockerfile
+compose.yaml
