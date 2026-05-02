@@ -156,10 +156,10 @@ DATA_DIR=/persistent/team-time-data
 - 部署后先访问 `/api/health`，再完整走一次创建和加入行程流程。
 
 ## 致谢
-- 挚友Rodean提供AI开发的精神支持与资金支持
+- 挚友Rodean：精神支持与提供AI开发的资金支持
 - ChatGPT codex|image2 
 - Google stitch
-- [linux do](https://Linux.do)
+- [Linux Do](https://Linux.do)
 
 ## API 约定
 
