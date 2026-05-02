@@ -82,19 +82,21 @@ async function main() {
     await joinTripAsMember(memberPage, teamCode);
     await visualCheck(memberPage, "430-member-availability");
 
-    await setupHeatmapLevelScenario(teamCode);
+    const heatmapLevelDate = await setupHeatmapLevelScenario(teamCode);
     await organizerPage.setViewportSize({ width: 390, height: 844 });
     await organizerPage.reload();
     await organizerPage.getByText("我的时间安排").waitFor();
+    await switchToTripDate(organizerPage, heatmapLevelDate);
     await organizerPage.locator('[data-action="switch-screen"][data-screen="heatmap"]').click();
     await organizerPage.getByText("人时段热力").waitFor();
     await assertHeatmapLevels(organizerPage);
     await organizerPage.locator(".screen-body").click({ position: { x: 12, y: 12 } });
     await visualCheck(organizerPage, "390-heatmap-levels");
 
-    await setupHeatmapCompactScenario(teamCode);
+    const heatmapCompactDate = await setupHeatmapCompactScenario(teamCode);
     await organizerPage.reload();
     await organizerPage.getByText("我的时间安排").waitFor();
+    await switchToTripDate(organizerPage, heatmapCompactDate);
     await organizerPage.locator('[data-action="switch-screen"][data-screen="heatmap"]').click();
     await organizerPage.getByText("人时段热力").waitFor();
     await assertHeatmapCompactState(organizerPage);
@@ -157,6 +159,11 @@ async function readTeamCode(page) {
   return match[1];
 }
 
+async function switchToTripDate(page, date) {
+  const button = page.locator(`[data-action="set-active-date"][data-date="${date}"]`);
+  if ((await button.count()) > 0) await button.click();
+}
+
 async function setupHeatmapLevelScenario(teamCode) {
   const snapshot = await readSnapshot(teamCode);
   const targetDate = snapshot.team.tripDates[0];
@@ -177,6 +184,7 @@ async function setupHeatmapLevelScenario(teamCode) {
 
   await writeMemberAvailability(teamCode, organizer.id, targetDate, organizerAvailability);
   await writeMemberAvailability(teamCode, member.id, targetDate, memberAvailability);
+  return targetDate;
 }
 
 async function setupHeatmapCompactScenario(teamCode) {
@@ -196,6 +204,7 @@ async function setupHeatmapCompactScenario(teamCode) {
 
   await writeMemberAvailability(teamCode, organizer.id, targetDate, organizerAvailability);
   await writeMemberAvailability(teamCode, member.id, targetDate, memberAvailability);
+  return targetDate;
 }
 
 async function assertHeatmapLevels(page) {
@@ -220,7 +229,7 @@ async function assertHeatmapLevels(page) {
   const shortSlotLabel = await cells.nth(6).getAttribute("aria-label");
   assert(shortSlotLabel?.includes("1人不空闲"), `Short hidden-label segment should keep aria detail: ${shortSlotLabel}`);
 
-  await cells.nth(1).hover();
+  await cells.nth(1).click();
   await page.locator('[data-role="heat-tooltip"]').waitFor();
   const tooltipText = await page.locator('[data-role="heat-tooltip"]').innerText();
   assert(tooltipText.includes("08:30-09:00"), `Tooltip should include slot range: ${tooltipText}`);

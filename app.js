@@ -561,7 +561,7 @@ function renderRoot() {
 function renderLoadingView() {
   view.mode = "loading";
   view.refs = {};
-  appEl.innerHTML = `<div class="login-panel"><section class="login-screen"><div class="login-hero"><div class="logo-badge"><span class="material-symbols-outlined">hourglass</span></div><h1>正在连接...</h1></div></section></div>`;
+  appEl.innerHTML = `<div class="login-panel"><section class="login-screen"><div class="login-main"><div class="login-hero"><div class="logo-badge"><img src="./logo-transparent.png" alt="Team Time" class="brand-logo" /></div><h1>正在连接...</h1></div></div></section></div>`;
 }
 
 function renderLoginView() {
@@ -569,22 +569,25 @@ function renderLoginView() {
   view.mode = "login";
   view.refs = {};
   appEl.innerHTML = `<div class="login-panel"><section class="login-screen">
-    <div class="login-hero"><div class="logo-badge"><span class="material-symbols-outlined">calendar_today</span></div><div class="hero-chip">后端 + 数据库</div><h1>出游时光机</h1><p>一次出行就是一个行程。发起人创建行程并设置日期，同行成员只需输入昵称和口令加入。</p></div>
-    <section class="login-card">
-      <div class="mode-switch"><button class="mode-pill ${state.teamMode === "join" ? "active" : ""}" data-action="set-mode" data-mode="join">加入行程</button><button class="mode-pill ${state.teamMode === "create" ? "active" : ""}" data-action="set-mode" data-mode="create">创建行程</button></div>
-      <div class="field-wrap">
-        <div class="field"><label>你的昵称</label><div class="field-box"><span class="material-symbols-outlined">person</span><input data-field="userName" value="${a(state.userName)}" placeholder="例如 小林" /></div></div>
-        ${
-          state.teamMode === "join"
-            ? `<div class="field"><label>行程口令</label><div class="field-box"><span class="material-symbols-outlined">key</span><input data-field="teamCode" maxlength="6" value="${a(state.teamCode)}" placeholder="例如 M8K2" /></div></div>`
-            : `<div class="field"><label>行程名称</label><div class="field-box"><span class="material-symbols-outlined">groups</span><input data-field="teamName" value="${a(state.draft.teamName)}" placeholder="例如 周末露营" /></div></div><div class="field"><label>行程口令（自动）</label><div class="field-box readonly-box"><span class="material-symbols-outlined">password</span><input readonly value="${a(state.teamCode || "创建后生成")}" /></div></div>`
-        }
-      </div>
-      ${state.teamMode === "create" ? renderDateEditorCard("出行日期", "由发起人统一设置本次行程可选日期。") : ""}
-      ${state.teamMode === "create" ? renderTripTimeEditorCard("行程时间", "用于推荐符合预计时长的最佳连续时段。") : ""}
-      <div class="login-actions"><button class="primary-btn" data-action="submit-login" ${state.busy ? "disabled" : ""}>${state.busy ? "处理中..." : state.teamMode === "join" ? "加入行程" : "创建行程并开始"}<span class="material-symbols-outlined">arrow_forward</span></button></div>
-      ${loginMessage ? `<div class="toast">${h(loginMessage)}</div>` : `<p class="hint">${state.teamMode === "join" ? "加入后会直接看到发起人设定的出行日期，无需自己选择。" : "行程数据会持久保存到 SQLite，重新进入可自动恢复会话。"}</p>`}
-    </section>
+    <div class="login-main">
+      <div class="login-hero"><div class="logo-badge"><img src="./logo-transparent.png" alt="Team Time" class="brand-logo" /></div><div class="hero-chip">后端 + 数据库</div><h1>出游时光机</h1><p>一次出行就是一个行程。发起人创建行程并设置日期，同行成员只需输入昵称和口令加入。</p></div>
+      <section class="login-card">
+        <div class="mode-switch"><button class="mode-pill ${state.teamMode === "join" ? "active" : ""}" data-action="set-mode" data-mode="join">加入行程</button><button class="mode-pill ${state.teamMode === "create" ? "active" : ""}" data-action="set-mode" data-mode="create">创建行程</button></div>
+        <div class="field-wrap">
+          <div class="field"><label>你的昵称</label><div class="field-box"><span class="material-symbols-outlined">person</span><input data-field="userName" value="${a(state.userName)}" placeholder="例如 小林" /></div></div>
+          ${
+            state.teamMode === "join"
+              ? `<div class="field"><label>行程口令</label><div class="field-box"><span class="material-symbols-outlined">key</span><input data-field="teamCode" maxlength="6" value="${a(state.teamCode)}" placeholder="例如 M8K2" /></div></div>`
+              : `<div class="field"><label>行程名称</label><div class="field-box"><span class="material-symbols-outlined">groups</span><input data-field="teamName" value="${a(state.draft.teamName)}" placeholder="例如 周末露营" /></div></div><div class="field"><label>行程口令（自动）</label><div class="field-box readonly-box"><span class="material-symbols-outlined">password</span><input readonly value="${a(state.teamCode || "创建后生成")}" /></div></div>`
+          }
+        </div>
+        ${state.teamMode === "create" ? renderDateEditorCard("出行日期", "由发起人统一设置本次行程可选日期。") : ""}
+        ${state.teamMode === "create" ? renderTripTimeEditorCard("行程时间", "用于推荐符合预计时长的最佳连续时段。") : ""}
+        <div class="login-actions"><button class="primary-btn" data-action="submit-login" ${state.busy ? "disabled" : ""}>${state.busy ? "处理中..." : state.teamMode === "join" ? "加入行程" : "创建行程并开始"}<span class="material-symbols-outlined">arrow_forward</span></button></div>
+        ${loginMessage ? `<div class="toast">${h(loginMessage)}</div>` : `<p class="hint">${state.teamMode === "join" ? "加入后会直接看到发起人设定的出行日期，无需自己选择。" : "行程数据会持久保存到 SQLite，重新进入可自动恢复会话。"}</p>`}
+      </section>
+    </div>
+    <footer class="footer-inline"><a href="https://github.com/zhuchenyu2008/team-time" target="_blank" rel="noopener">github.com/zhuchenyu2008/team-time</a><span aria-hidden="true">·</span><span>作者：Zhu Chenyu</span></footer>
   </section></div>`;
 }
 

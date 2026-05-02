@@ -460,7 +460,9 @@ function sendFile(res, filePath, headOnly) {
         ? "application/javascript; charset=utf-8"
         : ext === ".css"
           ? "text/css; charset=utf-8"
-          : "application/octet-stream";
+          : ext === ".png"
+            ? "image/png"
+            : "application/octet-stream";
   const content = fs.readFileSync(filePath);
   res.writeHead(200, { "Content-Type": contentType, "Content-Length": content.length });
   if (headOnly) {
