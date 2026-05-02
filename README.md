@@ -1,53 +1,53 @@
 # Team Time
 
-English | [简体中文](README.zh-CN.md)
+简体中文 | [English](README.en.md)
 
-## Overview
+## 概览
 
-Team Time is a mobile-first trip scheduling web app for small groups. An organizer creates a trip, sets candidate dates, expected duration, and the recommended daily time range. Members join with a short trip code, mark their availability by date, and the app automatically produces a group heatmap, the best continuous time window, and an `.ics` calendar export.
+Team Time 是一个移动端优先的小团队出游排期 Web 应用。发起人创建行程，设置候选日期、预计时长和每日推荐时间范围。成员使用短行程口令加入，按日期标记自己的可用时间，应用会自动生成同行热力图、最佳连续时间窗口，并支持导出 `.ics` 日历文件。
 
-## Features
+## 功能
 
-- Create or join a trip with a short shareable code.
-- Let the organizer manage the trip name, candidate dates, expected duration, and daily recommendation range.
-- Let each member edit availability in 30-minute slots for every candidate date, with slots free by default and tap-to-mark busy.
-- Sync edits from the local browser session and show a group heatmap after multiple members join.
-- Calculate the best continuous time window across all candidate dates and export it as a calendar file.
+- 使用短口令创建或加入行程，方便分享。
+- 由发起人管理行程名称、候选日期、预计时长和每日推荐范围。
+- 每位成员按候选日期编辑 30 分钟粒度的可用时段，默认空闲，点击即可标记不空闲。
+- 同步本机浏览器会话中的编辑结果，并在多人加入后展示同行热力图。
+- 跨所有候选日期计算最佳连续时间窗口，并导出为日历文件。
 
-## Screenshots
+## 界面截图
 
-| Availability | Heatmap | Summary |
+| 可用时间 | 热力图 | 总结 |
 | --- | --- | --- |
-| <img src="docs/screenshots/availability-mobile.png" alt="Availability editor on mobile" width="240"> | <img src="docs/screenshots/heatmap-mobile.png" alt="Group heatmap on mobile" width="240"> | <img src="docs/screenshots/summary-desktop.png" alt="Recommended time summary on desktop" width="360"> |
+| <img src="docs/screenshots/availability-mobile.png" alt="移动端可用时间编辑" width="240"> | <img src="docs/screenshots/heatmap-mobile.png" alt="移动端同行热力图" width="240"> | <img src="docs/screenshots/summary-desktop.png" alt="桌面端推荐时间总结" width="360"> |
 
-## Tech Stack
+## 技术栈
 
-- Frontend: plain `index.html`, `app.js`, and `styles.css`
-- Backend: plain Node.js HTTP server in `server.js`
-- Database: built-in Node.js `node:sqlite` with the file database `team-time.db`
-- Runtime dependencies: no third-party runtime dependencies
+- 前端：原生 `index.html`、`app.js` 和 `styles.css`
+- 后端：`server.js` 中的原生 Node.js HTTP 服务
+- 数据库：Node.js 内置 `node:sqlite`，文件数据库为 `team-time.db`
+- 运行时依赖：无第三方运行时依赖
 
-## Local Development
+## 本地开发
 
-Node.js `v24+` is required because the project uses the built-in `node:sqlite` module.
+项目需要 Node.js `v24+`，因为使用了内置的 `node:sqlite` 模块。
 
 ```bash
 npm install
 npm run dev
 ```
 
-Default URLs:
+默认访问地址：
 
-- Web: `http://localhost:4173`
-- Health check: `http://localhost:4173/api/health`
+- Web：`http://localhost:4173`
+- 健康检查：`http://localhost:4173/api/health`
 
-Optional environment variables:
+可选环境变量：
 
-- `HOST`: listen address, default `0.0.0.0`
-- `PORT`: server port, default `4173`
-- `DATA_DIR`: database directory, default `data`
+- `HOST`：监听地址，默认 `0.0.0.0`
+- `PORT`：服务端口，默认 `4173`
+- `DATA_DIR`：数据库目录，默认 `data`
 
-## Verification
+## 验证
 
 ```bash
 npm run check
@@ -55,91 +55,91 @@ npm run smoke:api
 npm run test:e2e
 ```
 
-You can also run the full verification suite at once:
+也可以一次性运行完整验证套件：
 
 ```bash
 npm run verify
 ```
 
-What the checks cover:
+检查覆盖内容：
 
-- `check`: validates the syntax of `server.js`, `app.js`, and the test scripts.
-- `smoke:api`: starts a temporary server and verifies health checks, trip creation, joining a trip, multi-date availability, organizer permissions, non-default ports, temporary `DATA_DIR`, and data persistence after restart.
-- `test:e2e`: runs the mobile-first Playwright flow for creation, joining, date switching, busy-slot marking, heatmap, summary page, and the `.ics` download entry, then writes screenshots to `test-results/e2e/`.
+- `check`：验证 `server.js`、`app.js` 和测试脚本的语法。
+- `smoke:api`：启动临时服务，验证健康检查、创建行程、加入行程、多日期可用时间、发起人权限、非默认端口、临时 `DATA_DIR` 和重启后的数据持久化。
+- `test:e2e`：运行移动端优先的 Playwright 流程，覆盖创建、加入、日期切换、标记不空闲、热力图、总结页和 `.ics` 下载入口，并将截图写入 `test-results/e2e/`。
 
-Before the first Playwright run, install a browser if the machine does not already have Chrome or Edge available:
+首次运行 Playwright 前，如果本机没有可用的 Chrome 或 Edge，请先安装浏览器：
 
 ```bash
 npm run browsers:install
 ```
 
-To use a specific browser executable, set:
+如需使用指定浏览器可执行文件，请设置：
 
 ```bash
 PLAYWRIGHT_EXECUTABLE_PATH=/path/to/chrome-or-edge
 ```
 
-Test data is written to `.tmp-smoke-data/`. The scripts clean that directory, and it is already listed in `.gitignore`.
+测试数据会写入 `.tmp-smoke-data/`。脚本会清理该目录，并且它已经列入 `.gitignore`。
 
-## Docker Deployment
+## Docker 部署
 
-Build the production image:
+构建生产镜像：
 
 ```bash
 docker build -t team-time:local .
 ```
 
-Run the container directly:
+直接运行容器：
 
 ```bash
 docker run -d --name team-time -p 4173:4173 -v team-time-data:/app/data team-time:local
 ```
 
-Docker Compose is the recommended way to start the service:
+推荐使用 Docker Compose 启动服务：
 
 ```bash
 docker compose up -d --build
 ```
 
-Use a custom host port:
+使用自定义宿主机端口：
 
 ```bash
 HOST_PORT=8080 docker compose up -d --build
 ```
 
-Common operations:
+常用操作：
 
 ```bash
 docker compose logs -f
 docker compose down
 ```
 
-The default URL is `http://localhost:4173`, and the health check is `http://localhost:4173/api/health`. Inside the container, the service port is fixed at `4173` and the data directory is fixed at `/app/data`.
+默认访问地址为 `http://localhost:4173`，健康检查为 `http://localhost:4173/api/health`。容器内服务端口固定为 `4173`，数据目录固定为 `/app/data`。
 
-Compose persists the database in the named volume `team-time-data`. Removing the container or running `docker compose down` does not delete trip data. If that volume is deleted, `team-time.db` and all trip data are deleted with it.
+Compose 会将数据库持久化到 named volume `team-time-data`。删除容器或运行 `docker compose down` 不会删除行程数据。如果删除该 volume，`team-time.db` 和所有行程数据也会一并删除。
 
-## Public Deployment
+## 公开部署
 
-Deploy to a platform that can run Node.js 24+ and provide persistent disk storage, such as Render, Railway, Fly.io, or a VPS. Do not deploy to static-only hosting because the app needs a backend API and a SQLite database.
+请部署到可运行 Node.js 24+ 且提供持久磁盘存储的平台，例如 Render、Railway、Fly.io 或 VPS。不要部署到纯静态托管，因为应用需要后端 API 和 SQLite 数据库。
 
-Recommended environment variables:
+推荐环境变量：
 
 ```bash
 HOST=0.0.0.0
-PORT=<platform-assigned-port>
+PORT=<平台分配端口>
 DATA_DIR=/persistent/team-time-data
 ```
 
-Deployment notes:
+部署注意事项：
 
-- `DATA_DIR` must point to a persistent disk or volume, otherwise trip data is lost after service restarts.
-- The database file is created automatically at `${DATA_DIR}/team-time.db`.
-- Use `npm start` as the start command.
-- After deployment, visit `/api/health`, then run through one create-and-join trip flow.
+- `DATA_DIR` 必须指向持久磁盘或持久卷，否则服务重启后行程数据会丢失。
+- 数据库文件会自动创建在 `${DATA_DIR}/team-time.db`。
+- 启动命令使用 `npm start`。
+- 部署后先访问 `/api/health`，再完整走一次创建和加入行程流程。
 
-## API Contract
+## API 约定
 
-Reserved public endpoints:
+保留的公开接口：
 
 - `GET /api/health`
 - `POST /api/teams`
@@ -148,11 +148,11 @@ Reserved public endpoints:
 - `PATCH /api/teams/:code?memberId=...`
 - `PUT /api/teams/:code/members/:id/availability`
 
-The `team` response includes `tripDates`, `durationMinutes`, `dayStartMinutes`, and `dayEndMinutes`. Member responses include `availabilityByDate`. Only members with `role === "发起人"` can update trip settings through `PATCH /api/teams/:code?memberId=...`.
+`team` 响应包含 `tripDates`、`durationMinutes`、`dayStartMinutes` 和 `dayEndMinutes`。成员响应包含 `availabilityByDate`。只有 `role === "发起人"` 的成员可以通过 `PATCH /api/teams/:code?memberId=...` 更新行程设置。
 
-## Database
+## 数据库
 
-- Default data directory: `data`
-- Default database path: `data/team-time.db`
-- Tables: `teams`, `members`, `availabilities`
-- On startup, the server automatically creates missing tables and migrates legacy single-date availability data to the multi-date structure.
+- 默认数据目录：`data`
+- 默认数据库路径：`data/team-time.db`
+- 表：`teams`、`members`、`availabilities`
+- 服务启动时会自动创建缺失表，并将旧版单日期 availability 数据迁移到多日期结构。
