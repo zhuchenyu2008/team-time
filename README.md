@@ -157,8 +157,8 @@ DATA_DIR=/persistent/team-time-data
 
 ## 致谢
 - 挚友Rodean：精神支持与提供AI开发的资金支持
-- ChatGPT：codex | image2 
-- Google lab： stitch
+- ChatGPT：Codex | Image-2 
+- Google lab： Stitch
 - [Linux Do](https://Linux.do)
 
 ## API 约定
