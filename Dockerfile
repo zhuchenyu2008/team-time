@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
-COPY server.js index.html app.js styles.css ./
+COPY server.js index.html app.js styles.css logo-transparent.png logo.png ./
 
 RUN mkdir -p /app/data && chown -R node:node /app/data
 
