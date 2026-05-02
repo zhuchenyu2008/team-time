@@ -155,6 +155,12 @@ DATA_DIR=/persistent/team-time-data
 - 启动命令使用 `npm start`。
 - 部署后先访问 `/api/health`，再完整走一次创建和加入行程流程。
 
+## 致谢
+- 挚友Rodean提供AI开发的精神支持与资金支持
+- ChatGPT codex|image2 
+- Google stitch
+- [linux do](https://Linux.do)
+
 ## API 约定
 
 保留的公开接口：
