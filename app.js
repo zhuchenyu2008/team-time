@@ -570,7 +570,7 @@ function renderLoginView() {
   view.refs = {};
   appEl.innerHTML = `<div class="login-panel"><section class="login-screen">
     <div class="login-main">
-      <div class="login-hero"><div class="logo-badge"><img src="./logo-transparent.png" alt="Team Time" class="brand-logo" /></div><div class="hero-chip">后端 + 数据库</div><h1>出游时光机</h1><p>一次出行就是一个行程。发起人创建行程并设置日期，同行成员只需输入昵称和口令加入。</p></div>
+      <div class="login-hero"><div class="logo-badge"><img src="./logo-transparent.png" alt="Team Time" class="brand-logo" /></div><div class="hero-chip">Let’s go!</div><h1>出游时光机</h1><p>一次出行就是一个行程。发起人创建行程并设置日期，同行成员只需输入昵称和口令加入。</p></div>
       <section class="login-card">
         <div class="mode-switch"><button class="mode-pill ${state.teamMode === "join" ? "active" : ""}" data-action="set-mode" data-mode="join">加入行程</button><button class="mode-pill ${state.teamMode === "create" ? "active" : ""}" data-action="set-mode" data-mode="create">创建行程</button></div>
         <div class="field-wrap">
