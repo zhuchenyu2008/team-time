@@ -1,6 +1,24 @@
-# Team Time
+<p align="center">
+  <img src="logo-transparent.png" alt="Team Time" width="156">
+</p>
 
-[简体中文](README.md) | English
+<h1 align="center">Team Time</h1>
+
+<p align="center">
+  A mobile-first trip scheduling app for small groups, with automatic availability heatmaps and best-time recommendations.
+</p>
+
+<p align="center">
+  <img alt="Node.js v24+" src="https://img.shields.io/badge/Node.js-v24%2B-118a45?style=flat-square">
+  <img alt="SQLite" src="https://img.shields.io/badge/SQLite-node%3Asqlite-1d6fb8?style=flat-square">
+  <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime-0_dependencies-0f766e?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="README.md">简体中文</a>
+  <span> · </span>
+  <strong>English</strong>
+</p>
 
 ## Overview
 

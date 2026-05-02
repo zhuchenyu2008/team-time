@@ -1,6 +1,24 @@
-# Team Time
+<p align="center">
+  <img src="logo-transparent.png" alt="Team Time" width="156">
+</p>
 
-简体中文 | [English](README.en.md)
+<h1 align="center">Team Time</h1>
+
+<p align="center">
+  移动端优先的小团队出游排期应用，自动汇总同行可用时间并推荐最佳连续时段。
+</p>
+
+<p align="center">
+  <img alt="Node.js v24+" src="https://img.shields.io/badge/Node.js-v24%2B-118a45?style=flat-square">
+  <img alt="SQLite" src="https://img.shields.io/badge/SQLite-node%3Asqlite-1d6fb8?style=flat-square">
+  <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime-0_dependencies-0f766e?style=flat-square">
+</p>
+
+<p align="center">
+  <strong>简体中文</strong>
+  <span> · </span>
+  <a href="README.en.md">English</a>
+</p>
 
 ## 概览
 
